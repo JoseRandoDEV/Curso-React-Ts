@@ -4,7 +4,7 @@ import { characters } from "../../api/characters"
 import { ICharacter } from "./interfaces/character.interface"
 import { Box, Chip, CircularProgress, Container, Divider, Grid, Typography } from "@mui/material";
 
-export const CharacterPage: React.FC = () => {
+const CharacterPage: React.FC = () => {
     const { id } = useParams()
     const [loading, setLoading] = React.useState<boolean>(true)
     const [character, setCharacter] = React.useState<ICharacter | null>(null)
@@ -38,7 +38,7 @@ export const CharacterPage: React.FC = () => {
                                 </Box>
                             </Grid>
                             <Grid  marginInlineStart={20} marginInlineEnd={1} marginBottom={10}>
-                                <img src={character!.image} style={{width:"100%", borderRadius: "0.5em"}}
+                                <img alt="" src={character!.image} style={{width:"100%", borderRadius: "0.5em"}}
                                  />
                             </Grid>
                         </Grid>
@@ -47,3 +47,5 @@ export const CharacterPage: React.FC = () => {
         </Box>
     );
 };
+
+export default CharacterPage
