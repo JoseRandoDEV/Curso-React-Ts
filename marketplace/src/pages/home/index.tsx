@@ -43,7 +43,7 @@ export const HomePage: React.FC = () => {
             ) : (
                 <>
                     <div>
-                        {allCharacters?.length !== 0 ? (
+                        {allCharacters!.length !== 0 ? (
                             <Grid container spacing={2} direction="row" marginBlockStart={2}>
                                 {allCharacters?.map((character) => (
                                     <Grid key={character.id} width={276}>

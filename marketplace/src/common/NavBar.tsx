@@ -3,12 +3,20 @@ import React from "react"
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined'
 import { useNavigate } from "react-router-dom";
 
-import { useAppSelector } from "../redux/hooks";
+import { useAppDispatch, useAppSelector } from "../redux/hooks";
+import { logout } from "../redux/slices/auth.slice";
 
 export const NavBar: React.FC<{}> = () =>{
     const navigate = useNavigate()
+    const { isAuth } = useAppSelector((state) => state.authReducer)
     const items = useAppSelector((state) => state.cartReducer)
     const [, setOpen] = React.useState<boolean>(false)
+
+    const dispatch = useAppDispatch()
+    const handleLogout = () => {
+        dispatch(logout())
+        navigate('/login')
+    }
 
     const handleStateViewDrawer = () => {
         setOpen((state) => !state);
@@ -24,6 +32,9 @@ export const NavBar: React.FC<{}> = () =>{
                                 <Typography>JoseRandoDEV</Typography>
                             </Grid>
                             <Grid>
+                                {   isAuth ? ( 
+                                    <Button variant="contained" onClick={()=> handleLogout()}>Logout</Button>
+                                ) : (
                                 <Stack direction= "row" spacing= {2}>
                                     <IconButton
                                     color="primary"
@@ -36,6 +47,7 @@ export const NavBar: React.FC<{}> = () =>{
                                     <Button variant="contained" onClick={()=>navigate("login")}>Login</Button>
                                     <Button variant="outlined">Register</Button>
                                 </Stack>
+                                )}
                             </Grid>
                         </Grid>
                     </Container>

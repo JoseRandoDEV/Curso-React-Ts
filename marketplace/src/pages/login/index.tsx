@@ -3,6 +3,9 @@ import { Box, Button, Container, Paper, TextField, Typography, Grid } from "@mui
 import { useNotification } from "../../context/notification.context"
 import { LoginValidate } from "../../utils/validateForm";
 import { useFormik } from "formik";
+import { useAppDispatch, useAppSelector } from "../../redux/hooks";
+import { Navigate, useNavigate } from "react-router-dom";
+import { login } from "../../redux/slices/auth.slice";
 
 type LoginType = {
   username: string;
@@ -11,6 +14,9 @@ type LoginType = {
 
 const LoginPage: React.FC<{}> = () => {
   const { getSuccess } = useNotification();
+  const { isAuth } = useAppSelector((state) => state.authReducer)
+  const navigate = useNavigate();
+  const dispatch = useAppDispatch();
   const formik = useFormik<LoginType>({
     initialValues: {
       username: '',
@@ -18,12 +24,13 @@ const LoginPage: React.FC<{}> = () => {
     },
     validationSchema: LoginValidate,
     onSubmit: (values: LoginType) => {
+      dispatch(login())
+      navigate('/')
       getSuccess(JSON.stringify(values))
     },
   });
 
-
-  return (
+  return isAuth ? <Navigate to='/' replace /> : (
     <Container maxWidth="sm">
       <Grid container direction="column" alignItems="center" justifyContent="center"
         sx={{ minHeight: "100vh" }}>

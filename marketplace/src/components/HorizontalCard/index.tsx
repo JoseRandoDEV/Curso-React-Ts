@@ -1,4 +1,5 @@
 import {
+    Grid,
     Card, 
     CardActions, 
     CardContent, 
@@ -7,7 +8,6 @@ import {
     IconButton, 
     Typography
 } from '@mui/material';
-import Grid from '@mui/material/Grid';
 import CloseRoundedIcon from '@mui/icons-material/CloseRounded'
 import { useAppDispatch } from '../../redux/hooks';
 import { removeToCart } from '../../redux/slices/cart.slice';
@@ -28,7 +28,9 @@ export const HorizonalCardComponent: React.FC<CardHorizontalComponentProps> = ({
     const dispatch = useAppDispatch();
 
     const handleRemoveToCart = () => {
-            dispatch(removeToCart({id}));
+            dispatch(
+                removeToCart({id})
+            );
     };
     return (
         <Card sx={{display: 'flex', my: 2}}>
@@ -38,7 +40,7 @@ export const HorizonalCardComponent: React.FC<CardHorizontalComponentProps> = ({
                     image={image}
                     alt="Rick and Morty"
                     />
-                    <Grid container sx={{mx: 1}}>
+                    <Grid container sx={{ mx: 1 }}>
                         <Grid>
                             <CardContent>
                                 <Typography variant="h4">{name}</Typography>

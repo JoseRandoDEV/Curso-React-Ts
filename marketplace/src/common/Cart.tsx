@@ -1,9 +1,9 @@
 import {
-    Box, 
-    Divider, 
-    Drawer, 
-    IconButton, 
-    Stack, 
+    Box,
+    Divider,
+    Drawer,
+    IconButton,
+    Stack,
     Typography
 } from '@mui/material';
 import CloseRoundedIcon from '@mui/icons-material/CloseRounded'
@@ -22,12 +22,12 @@ export const CartComponent: React.FC<CartComponentProps> = ({
     const items = useAppSelector((state) => state.cartReducer)
     return (
         <Drawer anchor={'right'} open={open}>
-            <Box sx={{ width: '25em', p: 2}}>
+            <Box sx={{ width: '25em', p: 2 }}>
                 <Stack
                     direction="row"
                     justifyContent="space-between"
                     alignItems="center"
-                    >
+                >
                     <Typography variant="h5">Cart</Typography>
                     <IconButton color="primary" onClick={() => handleStateViewDrawer()}>
                         <CloseRoundedIcon />
@@ -35,7 +35,7 @@ export const CartComponent: React.FC<CartComponentProps> = ({
                 </Stack>
                 <Divider sx={{ my: 1.5 }} />
                 {items.length > 0
-                    ? items.map(({id, image, name, info}) => (
+                    ? items.map(({ id, image, name, info }) => (
                         <HorizonalCardComponent
                             key={id}
                             id={id}
@@ -43,7 +43,7 @@ export const CartComponent: React.FC<CartComponentProps> = ({
                             name={name}
                             info={info}
                         />
-                      ))
+                    ))
                     : 'Nada por aqui'}
             </Box>
         </Drawer>

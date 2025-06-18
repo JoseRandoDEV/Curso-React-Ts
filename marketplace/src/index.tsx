@@ -13,12 +13,10 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-    <ThemeConfig>
-      <App />
-    </ThemeConfig>
+      <ThemeConfig>
+        <App />
+      </ThemeConfig>
     </Provider>
-    
-    
   </React.StrictMode>
 );
 
