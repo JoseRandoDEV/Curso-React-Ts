@@ -1,11 +1,11 @@
 import React from "react"
 import { Box, Button, Container, Paper, TextField, Typography, Grid } from "@mui/material"
-import { useNotification } from "../../context/notification.context"
+//import { useNotification } from "../../context/notification.context"
 import { LoginValidate } from "../../utils/validateForm";
 import { useFormik } from "formik";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { Navigate, useNavigate } from "react-router-dom";
-import { login } from "../../redux/slices/auth.slice";
+import { authThunk } from "../../redux/slices/thunks/auth.thunk";
 
 type LoginType = {
   username: string;
@@ -13,20 +13,22 @@ type LoginType = {
 }
 
 const LoginPage: React.FC<{}> = () => {
-  const { getSuccess } = useNotification();
+  // user: joseandresrando@gmail.com
+  //password: jose1234
+  //const { getSuccess } = useNotification();
   const { isAuth } = useAppSelector((state) => state.authReducer)
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const formik = useFormik<LoginType>({
     initialValues: {
       username: '',
-      password: ''
+      password: '',
     },
     validationSchema: LoginValidate,
     onSubmit: (values: LoginType) => {
-      dispatch(login())
+      dispatch(authThunk(values))
       navigate('/')
-      getSuccess(JSON.stringify(values))
+      //getSuccess(JSON.stringify(values))
     },
   });
 

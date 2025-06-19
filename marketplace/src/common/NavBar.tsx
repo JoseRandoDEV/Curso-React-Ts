@@ -5,9 +5,11 @@ import { useNavigate } from "react-router-dom";
 
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import { logout } from "../redux/slices/auth.slice";
+import { useCookies } from "react-cookie";
 
 export const NavBar: React.FC<{}> = () =>{
     const navigate = useNavigate()
+    const [,, remove] = useCookies()
     const { isAuth } = useAppSelector((state) => state.authReducer)
     const items = useAppSelector((state) => state.cartReducer)
     const [, setOpen] = React.useState<boolean>(false)
@@ -15,6 +17,7 @@ export const NavBar: React.FC<{}> = () =>{
     const dispatch = useAppDispatch()
     const handleLogout = () => {
         dispatch(logout())
+        remove('accessToken')
         navigate('/login')
     }
 
